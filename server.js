@@ -1,14 +1,17 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const path = require('path');
-
+const cors = require('cors');
 const app = express();
+const dotenv= require('dotenv');
 
+dotenv.config();
 // Connect to Database
 connectDB();
 
 // Initialize Middleware
 app.use(express.json({ strict: false }));
+app.use(cors());
 
 // Define Routes
 app.use('/api/users', require('./routes/api/users'));
@@ -27,5 +30,5 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // SERVER
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server started on PORT ${PORT}`));
